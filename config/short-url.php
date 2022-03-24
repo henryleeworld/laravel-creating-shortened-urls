@@ -4,6 +4,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Custom Prefix
+    |--------------------------------------------------------------------------
+    |
+    | This configuration value is used to determine the prefix that
+    | is registered for the short URL route.
+    |
+    */
+    'prefix' => '/short',
+
+    /*
+    |--------------------------------------------------------------------------
     | Custom Routing
     |--------------------------------------------------------------------------
     |
@@ -16,6 +27,21 @@ return [
     |
     */
     'disable_default_route' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Forwards query parameters
+    |--------------------------------------------------------------------------
+    |
+    | Here you can specify if the newly created short URLs will forward
+    | the query parameters to the destination by default. This option
+    | can be overridden when creating the short URL with the
+    | ->forwardQueryParams() method.
+    |
+    | eg: https://yoursite.com/short/xxx?a=b => https://destination.com/page?a=b
+    |
+    */
+    'forward_query_params' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -61,6 +87,18 @@ return [
     |
     */
     'key_salt'              => 'AshAllenDesign\ShortURL',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Alphabet
+    |--------------------------------------------------------------------------
+    |
+    | Define the characters allowed in the output short URL keys.
+    | The 'alphabet' must be at least 16 unique characters
+    | and cannot contain spaces.
+    |
+    */
+    'alphabet'              => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
 
     /*
     |--------------------------------------------------------------------------
