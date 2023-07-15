@@ -1,4 +1,4 @@
-# Laravel 9 建立短網址
+# Laravel 10 建立短網址
 
 引入 ashallendesign 的 short-url 套件來擴增建立短網址，讓使用者能將冗長的網址精簡為簡短字元組合，同時也能讓網址內容能在整理、分享時讓人容易點選，或是再做分享，尤其在手機閱讀越來越普及之下，短網址更提供容易觀看、使用的好處。
 
@@ -26,8 +26,8 @@ $ php artisan migrate
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/rrADAmB.gif)
+![](https://i.imgur.com/pfHQQ1L.gif)
 > 將要縮短的網址貼上，點擊「產生」送出
 
-![](https://i.imgur.com/B6sOrgS.png)
+![](https://i.imgur.com/4mWNiln.png)
 > 讓原本所帶的 HTTP 參照位址能夠原封不動地帶到目的地網址去

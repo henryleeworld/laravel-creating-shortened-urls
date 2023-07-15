@@ -31,6 +31,6 @@ class ShortenedUrlsController extends Controller
         ]);
         ShortURL::destinationUrl($request->url)->make();
         return redirect('shortened-urls/generate')
-             ->with('success', '短網址產生成功！');
+             ->with('success', __('Short URL generated successfully!'));
     }
 }
