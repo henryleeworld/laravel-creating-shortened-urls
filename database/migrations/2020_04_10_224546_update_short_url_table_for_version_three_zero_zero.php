@@ -8,12 +8,10 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('short_urls', function (Blueprint $table) {
+        Schema::connection(config('short-url.connection'))->table('short_urls', function (Blueprint $table) {
             $table->timestamp('activated_at')->after('track_device_type')->nullable()->default(now());
             $table->timestamp('deactivated_at')->after('activated_at')->nullable();
         });
@@ -21,12 +19,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::table('short_urls', function (Blueprint $table) {
+        Schema::connection(config('short-url.connection'))->table('short_urls', function (Blueprint $table) {
             $table->dropColumn(['activated_at', 'deactivated_at']);
         });
     }

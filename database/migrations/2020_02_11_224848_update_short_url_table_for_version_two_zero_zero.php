@@ -9,12 +9,10 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('short_urls', function (Blueprint $table) {
+        Schema::connection(config('short-url.connection'))->table('short_urls', function (Blueprint $table) {
             $table->integer('redirect_status_code')->after('track_visits')->default(301);
             $table->boolean('track_ip_address')->after('redirect_status_code')->default(false);
             $table->boolean('track_operating_system')->after('track_ip_address')->default(false);
@@ -25,25 +23,23 @@ return new class extends Migration
             $table->boolean('track_device_type')->after('track_referer_url')->default(false);
         });
 
-        DB::table('short_urls')->update([
-            'track_ip_address'               => config('short-url.tracking.fields.ip_address'),
-            'track_operating_system'         => config('short-url.tracking.fields.operating_system'),
+        DB::connection(config('short-url.connection'))->table('short_urls')->update([
+            'track_ip_address' => config('short-url.tracking.fields.ip_address'),
+            'track_operating_system' => config('short-url.tracking.fields.operating_system'),
             'track_operating_system_version' => config('short-url.tracking.fields.operating_system_version'),
-            'track_browser'                  => config('short-url.tracking.fields.browser'),
-            'track_browser_version'          => config('short-url.tracking.fields.browser_version'),
-            'track_referer_url'              => config('short-url.tracking.fields.referer_url'),
-            'track_device_type'              => config('short-url.tracking.fields.device_type'),
+            'track_browser' => config('short-url.tracking.fields.browser'),
+            'track_browser_version' => config('short-url.tracking.fields.browser_version'),
+            'track_referer_url' => config('short-url.tracking.fields.referer_url'),
+            'track_device_type' => config('short-url.tracking.fields.device_type'),
         ]);
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::table('short_urls', function (Blueprint $table) {
+        Schema::connection(config('short-url.connection'))->table('short_urls', function (Blueprint $table) {
             $table->dropColumn([
                 'redirect_status_code',
                 'track_ip_address',

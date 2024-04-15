@@ -8,12 +8,10 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('short_url_visits', function (Blueprint $table) {
+        Schema::connection(config('short-url.connection'))->table('short_url_visits', function (Blueprint $table) {
             $table->string('referer_url')->after('browser_version')->nullable();
             $table->string('device_type')->after('referer_url')->nullable();
         });
@@ -21,12 +19,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::table('short_url_visits', function (Blueprint $table) {
+        Schema::connection(config('short-url.connection'))->table('short_url_visits', function (Blueprint $table) {
             $table->dropColumn(['referer_url', 'device_type']);
         });
     }

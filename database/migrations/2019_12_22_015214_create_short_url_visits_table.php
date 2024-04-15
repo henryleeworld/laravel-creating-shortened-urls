@@ -8,12 +8,10 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('short_url_visits', function (Blueprint $table) {
+        Schema::connection(config('short-url.connection'))->create('short_url_visits', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('short_url_id');
             $table->string('ip_address')->nullable();
@@ -30,11 +28,9 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('short_url_visits');
+        Schema::connection(config('short-url.connection'))->dropIfExists('short_url_visits');
     }
 };

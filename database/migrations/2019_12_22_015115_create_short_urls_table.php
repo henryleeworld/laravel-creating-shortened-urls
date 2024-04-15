@@ -8,15 +8,20 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('short_urls', function (Blueprint $table) {
+        Schema::connection(config('short-url.connection'))->create('short_urls', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('destination_url');
-            $table->string('url_key')->unique();
+
+            $table->string('url_key')->unique()->when(
+                Schema::getConnection()->getConfig('driver') === 'mysql',
+                function (Blueprint $column) {
+                    $column->collation('utf8mb4_bin');
+                }
+            );
+
             $table->string('default_short_url');
             $table->boolean('single_use');
             $table->boolean('track_visits');
@@ -26,11 +31,9 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('short_urls');
+        Schema::connection(config('short-url.connection'))->dropIfExists('short_urls');
     }
 };
